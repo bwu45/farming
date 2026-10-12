@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;
     Vector3 camOffset;
@@ -10,7 +10,7 @@ public class Camera : MonoBehaviour
         camOffset = transform.position - target.position;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         transform.position = target.position + camOffset;
     }
