@@ -7,7 +7,8 @@ public class SlotUI : MonoBehaviour
     public Image icon;
     public TMP_Text countText;
     public Button removeButton;
-    
+    public bool allowRemove = true;
+
     public void Set(Inventory.Slot slot)
     {
         if (slot.itemName == "")
@@ -21,6 +22,6 @@ public class SlotUI : MonoBehaviour
         icon.enabled = true;
         icon.sprite = slot.icon;
         countText.text = slot.count > 1 ? slot.count.ToString() : "";
-        removeButton.gameObject.SetActive(true);
+        removeButton.gameObject.SetActive(allowRemove);
     }
 }
