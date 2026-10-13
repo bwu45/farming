@@ -22,4 +22,16 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public void DropItem(Item item)
+    {
+        Vector2 spawnLocation = transform.position;
+
+        Vector2 spawnOffset = Random.insideUnitCircle.normalized*1f;
+
+        Item droppedItem = Instantiate(item, spawnLocation + spawnOffset, 
+            Quaternion.identity);
+
+        droppedItem.rb2d.AddForce(spawnOffset*.75f, ForceMode2D.Impulse);
+    }
 }
