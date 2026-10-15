@@ -107,9 +107,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8882863757283689480}
+  - {fileID: 7806574926396106222}
   - {fileID: 1763731714956340050}
   - {fileID: 4179575856760892767}
-  - {fileID: 7806574926396106222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -475,14 +475,14 @@ MonoBehaviour:
   m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbf8901e00817754c89b6a710499e875, type: 2}
-  m_sharedMaterial: {fileID: -3626190039817065647, guid: cbf8901e00817754c89b6a710499e875, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 70df33d6a064da54195863bea4d4b325, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281744986
-  m_fontColor: {r: 0.3529412, g: 0.24313726, b: 0.21176471, a: 1}
+    rgba: 4279453067
+  m_fontColor: {r: 0.5450981, g: 0.2705882, b: 0.07450981, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
