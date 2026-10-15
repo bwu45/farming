@@ -7,6 +7,7 @@ public class SlotUI : MonoBehaviour
     public Image icon;
     public TMP_Text countText;
     public Button removeButton;
+    public GameObject highlight;
     public bool allowRemove = true;
 
     public void Set(Inventory.Slot slot)
@@ -23,5 +24,10 @@ public class SlotUI : MonoBehaviour
         icon.sprite = slot.icon;
         countText.text = slot.count > 1 ? slot.count.ToString() : "";
         removeButton.gameObject.SetActive(allowRemove);
+    }
+
+    public void SetHighlight(bool on)
+    {
+        highlight.SetActive(on);
     }
 }

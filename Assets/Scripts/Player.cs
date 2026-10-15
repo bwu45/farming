@@ -1,8 +1,12 @@
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
     public Inventory inventory;
+    public int toolbarSize = 7;
+    public int SelectedIndex { get; private set; } = 0;
+    public event Action OnSelectedChanged;
 
     public void Awake()
     {
@@ -11,7 +15,21 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        float scroll = Input.mouseScrollDelta.y;
+
+        for (int i = 0; i < toolbarSize; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+                SelectSlot(i);
+        }
+
+        if (scroll > 0)
+            SelectSlot((SelectedIndex - 1 + toolbarSize) % toolbarSize);
+        else if (scroll < 0)
+            SelectSlot((SelectedIndex + 1) % toolbarSize);
+
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F))
         {
             Vector3Int position = Vector3Int.FloorToInt(transform.position);
 
@@ -23,12 +41,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void SelectSlot(int index) 
+    {
+        if (index == SelectedIndex) return;
+
+        SelectedIndex = index;
+        OnSelectedChanged?.Invoke();
+    }
+
     public void DropItem(Item item)
     {
         Vector2 spawnLocation = transform.position;
-
-        Vector2 spawnOffset = Random.insideUnitCircle.normalized*1f;
-
+        Vector2 spawnOffset = UnityEngine.Random.insideUnitCircle.normalized*1f;
         Item droppedItem = Instantiate(item, spawnLocation + spawnOffset, 
             Quaternion.identity);
 
