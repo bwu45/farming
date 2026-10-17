@@ -86,4 +86,14 @@ public class Inventory
         slots[index].RemoveItem();
         OnChanged?.Invoke();
     }
+
+    public void Swap(int a, int b)
+    {
+        if (a == b) return;
+        Slot temp = slots[a];
+        slots[a] = slots[b];
+        slots[b] = temp;
+
+        OnChanged?.Invoke();
+    }
 }

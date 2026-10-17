@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler, IEndDragHandler
 {
     public Image icon;
     public TMP_Text countText;
@@ -13,6 +13,8 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     public RectTransform dropZone;
     public System.Action onDroppedOutside;
     private Image dragIcon;
+    public int index;
+    public System.Action<int> onDropFrom;
 
     public void Set(Inventory.Slot slot)
     {
@@ -37,7 +39,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!icon.enabled) return;
+        if (!icon.enabled || dropZone == null) return;
         Canvas canvas = GetComponentInParent<Canvas>().rootCanvas;
         dragIcon = new GameObject("DragIcon").AddComponent<Image>();
         dragIcon.sprite = icon.sprite;
@@ -61,5 +63,12 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
         if (!inside)
             onDroppedOutside?.Invoke();
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        SlotUI source = eventData.pointerDrag.GetComponent<SlotUI>();
+        if (source == null || source.dragIcon == null) return;
+        onDropFrom?.Invoke(source.index);
     }
 }

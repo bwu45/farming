@@ -18,8 +18,10 @@ public class InventoryUI : MonoBehaviour
             slotUIs.Add(box);
 
             int index = i;
+            box.index = index;
             box.removeButton.onClick.AddListener(() => Remove(index));
             box.onDroppedOutside = () => Remove(index);
+            box.onDropFrom = from => player.inventory.Swap(from, index);
         }
 
         player.inventory.OnChanged += Refresh;
@@ -27,6 +29,16 @@ public class InventoryUI : MonoBehaviour
         Refresh();
 
         panel.SetActive(false);
+    }
+    public void Remove(int slotID)
+    {
+        Item itemToDrop = GameManager.instance.itemManager.
+            GetItemByName(player.inventory.slots[slotID].itemName);
+        if (itemToDrop != null)
+        {
+            player.DropItem(itemToDrop);
+            player.inventory.Remove(slotID);
+        }
     }
 
     private void OnDestroy()
@@ -53,16 +65,5 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < slotUIs.Count; i++)
             slotUIs[i].Set(player.inventory.slots[i]); 
-    }
-
-    public void Remove(int slotID)
-    {
-        Item itemToDrop = GameManager.instance.itemManager.
-            GetItemByName(player.inventory.slots[slotID].itemName);
-        if(itemToDrop != null)
-        {
-            player.DropItem(itemToDrop);
-            player.inventory.Remove(slotID);
-        }
     }
 }
