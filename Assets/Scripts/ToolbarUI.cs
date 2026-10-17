@@ -15,6 +15,12 @@ public class ToolbarUI : MonoBehaviour
         {
             SlotUI box = Instantiate(slotPrefab, slotGrid);
             box.allowRemove = false;
+
+            int index = i;
+            box.index = index;
+            box.dropZone = slotGrid as RectTransform;
+            box.onDropFrom = from => player.inventory.Swap(from, index);
+
             slotUIs.Add(box); 
         }
 

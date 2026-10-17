@@ -13,8 +13,10 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandl
     public RectTransform dropZone;
     public System.Action onDroppedOutside;
     private Image dragIcon;
+    private bool droppedOnSlot;
     public int index;
     public System.Action<int> onDropFrom;
+
 
     public void Set(Inventory.Slot slot)
     {
@@ -40,6 +42,8 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandl
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!icon.enabled || dropZone == null) return;
+        droppedOnSlot = false;
+
         Canvas canvas = GetComponentInParent<Canvas>().rootCanvas;
         dragIcon = new GameObject("DragIcon").AddComponent<Image>();
         dragIcon.sprite = icon.sprite;
@@ -61,7 +65,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandl
         bool inside = dropZone != null && 
             RectTransformUtility.RectangleContainsScreenPoint(dropZone, eventData.position);
 
-        if (!inside)
+        if (!inside && !droppedOnSlot)
             onDroppedOutside?.Invoke();
     }
 
@@ -69,6 +73,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandl
     {
         SlotUI source = eventData.pointerDrag.GetComponent<SlotUI>();
         if (source == null || source.dragIcon == null) return;
+        source.droppedOnSlot = true;
         onDropFrom?.Invoke(source.index);
     }
 }
