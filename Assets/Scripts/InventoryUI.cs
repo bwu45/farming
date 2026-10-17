@@ -14,10 +14,12 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < player.inventory.slots.Count; i++)
         {
             SlotUI box = Instantiate(slotPrefab, slotGrid);
+            box.dropZone = panel.GetComponent<RectTransform>();
             slotUIs.Add(box);
 
             int index = i;
             box.removeButton.onClick.AddListener(() => Remove(index));
+            box.onDroppedOutside = () => Remove(index);
         }
 
         player.inventory.OnChanged += Refresh;

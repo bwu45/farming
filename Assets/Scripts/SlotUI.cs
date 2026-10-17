@@ -1,14 +1,18 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SlotUI : MonoBehaviour
+public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image icon;
     public TMP_Text countText;
     public Button removeButton;
     public GameObject highlight;
     public bool allowRemove = true;
+    public RectTransform dropZone;
+    public System.Action onDroppedOutside;
+    private Image dragIcon;
 
     public void Set(Inventory.Slot slot)
     {
@@ -29,5 +33,33 @@ public class SlotUI : MonoBehaviour
     public void SetHighlight(bool on)
     {
         highlight.SetActive(on);
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (!icon.enabled) return;
+        Canvas canvas = GetComponentInParent<Canvas>().rootCanvas;
+        dragIcon = new GameObject("DragIcon").AddComponent<Image>();
+        dragIcon.sprite = icon.sprite;
+        dragIcon.rectTransform.sizeDelta = icon.rectTransform.rect.size;
+        dragIcon.transform.SetParent(canvas.transform, false);
+        dragIcon.transform.SetAsLastSibling();
+        dragIcon.raycastTarget = false;
+        dragIcon.transform.position = eventData.position;
+    }
+    public void OnDrag(PointerEventData eventData) 
+    {
+        if (dragIcon != null) dragIcon.transform.position = eventData.position;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (dragIcon == null) return;
+        Destroy(dragIcon.gameObject);
+
+        bool inside = dropZone != null && 
+            RectTransformUtility.RectangleContainsScreenPoint(dropZone, eventData.position);
+
+        if (!inside)
+            onDroppedOutside?.Invoke();
     }
 }
