@@ -8,10 +8,12 @@ public class Player : MonoBehaviour
     public int SelectedIndex { get; private set; } = 0;
     public Inventory.Slot SelectedSlot => inventory.slots[SelectedIndex];
     public event Action OnSelectedChanged;
+    private Animator animator;
 
     public void Awake()
     {
         inventory = new Inventory(21);
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F))
         {
             if (SelectedSlot.itemName != "Hoe") return;
+            animator.SetTrigger("hoe");
 
             Vector3Int position = Vector3Int.FloorToInt(transform.position);
 
