@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public Inventory inventory;
     public int toolbarSize = 7;
     public int SelectedIndex { get; private set; } = 0;
+    public Inventory.Slot SelectedSlot => inventory.slots[SelectedIndex];
     public event Action OnSelectedChanged;
 
     public void Awake()
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F))
         {
+            if (SelectedSlot.itemName != "Hoe") return;
+
             Vector3Int position = Vector3Int.FloorToInt(transform.position);
 
             if (GameManager.instance.tileManager.IsInteractable(position))
