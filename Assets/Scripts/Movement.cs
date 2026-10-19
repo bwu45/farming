@@ -20,6 +20,9 @@ public class Movement : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
 
         direction = new Vector2(horizontal, vertical).normalized;
+        if (animator != null && animator.GetCurrentAnimatorStateInfo(0).IsName("Hoe"))
+            direction = Vector2.zero;
+
         AnimateMovement(direction);
     }
 
