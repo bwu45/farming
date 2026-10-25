@@ -4,18 +4,18 @@ using UnityEngine;
 public class CropView : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public CropData Data {  get; private set; }
+    public CropData Data { get; private set; }
     public Crop Crop { get; private set; }
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer> ();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Init(CropData data)
     {
         Data = data;
-        Crop = data.CreateCrop ();
+        Crop = data.CreateCrop();
         Refresh();
     }
 
