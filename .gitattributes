@@ -149,3 +149,5 @@ Packages/packages-lock.json linguist-generated
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
 *.asesprite filter=lfs diff=lfs merge=lfs -text
+# Hide TextMesh Pro's bundled shaders from GitHub's language stats
+Assets/TextMesh[[:space:]]Pro/** linguist-vendored
