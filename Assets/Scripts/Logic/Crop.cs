@@ -1,3 +1,5 @@
+using System;
+
 public class Crop
 {
     public int DaysToGrow { get; }
@@ -7,6 +9,8 @@ public class Crop
 
     public Crop(int daysForGrowth)
     {
+        if (daysForGrowth < 1)
+            throw new ArgumentOutOfRangeException(nameof(daysForGrowth), "Crop needs at least 1 day to grow");
         DaysToGrow = daysForGrowth;
     }
 
@@ -17,5 +21,15 @@ public class Crop
         if (IsWatered && !CanHarvest)
             ++DaysGrown;
         IsWatered = false;
+    }
+
+    public int GetStage(int stageCount)
+    {
+        if (stageCount < 1)
+            throw new ArgumentOutOfRangeException(nameof(stageCount), "Crop needs at least 1 stage");
+        if (CanHarvest) 
+            return stageCount - 1;
+
+        return DaysGrown * (stageCount - 1) / DaysToGrow;
     }
 }
