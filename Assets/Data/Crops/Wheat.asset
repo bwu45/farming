@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078b293ed37e2d74e83184c88d300bef, type: 3}
   m_Name: Wheat
   m_EditorClassIdentifier: Assembly-CSharp::CropData
-  cropName: Crop Name
+  cropName: Wheat
   daysToGrow: 3
   growthStages:
   - {fileID: -7396305697263286651, guid: 0f9873d1f92463e488c2aa726380c2af, type: 3}
