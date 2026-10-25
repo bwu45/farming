@@ -11,7 +11,7 @@ public class CropData : ScriptableObject
     [SerializeField] private ItemData harvestItem;
     [SerializeField, Min(1)] private int sellPrice = 10;
 
-    //ready only 
+    //ready only; game code can't change shared crop settings at runtime 
     public string CropName => cropName;
     public int DaysToGrow => daysToGrow;
     public Sprite[] GrowthStages => growthStages;
