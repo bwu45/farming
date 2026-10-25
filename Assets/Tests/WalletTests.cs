@@ -15,4 +15,11 @@ public class WalletTests
         wallet.Add(50);
         Assert.AreEqual(50, wallet.Money);
     }
+
+    [Test]
+    public void AddNegativeAmountFails()
+    {
+        Wallet wallet = new Wallet();
+        Assert.Throws<System.ArgumentOutOfRangeException>(() => wallet.Add(-50));
+    }
 }
