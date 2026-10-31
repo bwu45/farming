@@ -19,6 +19,6 @@ MonoBehaviour:
   - {fileID: 3868332834043518974, guid: 0f9873d1f92463e488c2aa726380c2af, type: 3}
   - {fileID: 6812107102740459891, guid: 0f9873d1f92463e488c2aa726380c2af, type: 3}
   - {fileID: -4968072622433853253, guid: 0f9873d1f92463e488c2aa726380c2af, type: 3}
-  seedItem: {fileID: 0}
-  harvestItem: {fileID: 0}
+  seedItem: {fileID: 11400000, guid: 4d431a2d6ac249347a5cb8fa42f986fe, type: 2}
+  harvestItem: {fileID: 11400000, guid: 5dfb188dea22edc428fa29146ef63197, type: 2}
   sellPrice: 15
