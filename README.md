@@ -2,13 +2,13 @@
 
 A top-down 2D farming game built with Unity 6 and C#.
 
-> **Status:** Active development. Plowing and planting are complete. Watering, crop growth, harvesting, and selling are in progress.
+> **Status:** Active development. Plowing and planting are complete. Watering, crop growth, harvesting, and selling are in progress. Map redesign coming soon. 
 
 ---
 
 ## Overview
 
- A farming simulation in which players till land, plant crops, and tend them over in-game days. The project emphasizes maintainable architecture: game rules are implemented as engine-independent C# and covered by unit tests, while Unity components handle presentation and input.
+A farming simulation in which players till land, plant crops, and tend them over in-game days. The project emphasizes maintainable architecture: game rules are implemented as engine-independent C# and covered by unit tests, while Unity components handle presentation and input.
 
 ## Learning Goals
 
@@ -144,4 +144,4 @@ All subsequent systems were designed and implemented independently, including:
 
 ## Author
 
-**Bryant Wu** · Computer Science, University of California, Riverside · [LinkedIn](https://www.linkedin.com/in/bryantw1/) · Really cool guy 
+**Bryant Wu** · Computer Science, University of California, Riverside · [LinkedIn](https://www.linkedin.com/in/bryantw1/) · Really cool guy · midterms are killing me 😭😭
