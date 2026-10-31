@@ -12,10 +12,10 @@ public class CropView : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Init(CropData data)
+    public void Init(CropData data, Crop crop)
     {
         Data = data;
-        Crop = data.CreateCrop();
+        Crop = crop;
         Refresh();
     }
 

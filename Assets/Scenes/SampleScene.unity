@@ -15800,6 +15800,7 @@ GameObject:
   - component: {fileID: 1016378113}
   - component: {fileID: 1016378115}
   - component: {fileID: 1016378116}
+  - component: {fileID: 1016378117}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -15853,6 +15854,7 @@ MonoBehaviour:
   tileManager: {fileID: 0}
   itemManager: {fileID: 0}
   dayManager: {fileID: 0}
+  cropManager: {fileID: 0}
 --- !u!114 &1016378115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15884,6 +15886,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d14f9105f919f43bff7d45ad033aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
+--- !u!114 &1016378117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016378111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de3ede7bebc09b42ab494d66a18fa66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CropManager
+  cropPrefab: {fileID: 2117711219804961427, guid: 5ae6ce053e7e07f46be105c4caca3969, type: 3}
+  crops:
+  - {fileID: 11400000, guid: 682dc5748b698e04caa4c774f752edb1, type: 2}
+  - {fileID: 11400000, guid: 25ffc881d4c57194ea0a0ff5e83dbce1, type: 2}
 --- !u!1 &1141528641
 GameObject:
   m_ObjectHideFlags: 0

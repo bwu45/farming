@@ -25,4 +25,14 @@ public class TileManager : MonoBehaviour
     {
         interactableMap.SetTile(position, interactedTile);
     }
+
+    public bool IsPlowed(Vector3Int position) 
+    {
+        return interactableMap.GetTile(position) == interactedTile;
+    }
+
+    public Vector3 GetCellCenter(Vector3Int position)
+    {
+        return interactableMap.GetCellCenterWorld(position);
+    }
 }

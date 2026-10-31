@@ -35,11 +35,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F))
         {
+            Vector3Int position = Vector3Int.FloorToInt(transform.position);
             if (SelectedSlot.itemName == "Hoe")
             {
                 animator.SetTrigger("hoe");
-
-                Vector3Int position = Vector3Int.FloorToInt(transform.position);
 
                 if (GameManager.instance.tileManager.IsInteractable(position))
                 {
@@ -47,6 +46,8 @@ public class Player : MonoBehaviour
                     GameManager.instance.tileManager.SetInteracted(position);
                 }
             }
+            else if (GameManager.instance.cropManager.TryPlant(position, SelectedSlot.itemName))
+                inventory.Remove(SelectedIndex);
         }
     }
 
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
         Item prefab = GameManager.instance.itemManager.GetItemByName(slot.itemName);
         if (prefab == null)
         {
-            Debug.LogWarning($"No prefab is registed in ItemManager for '{slot.itemName}'");
+            Debug.LogWarning($"No prefab is registered in ItemManager for '{slot.itemName}'");
             return;
         }
 
