@@ -31,18 +31,21 @@ public class Player : MonoBehaviour
         else if (scroll < 0)
             SelectSlot((SelectedIndex + 1) % toolbarSize);
 
+        if(Input.GetKeyDown(KeyCode.Q)) DropFromSlot(SelectedIndex);
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F))
         {
-            if (SelectedSlot.itemName != "Hoe") return;
-            animator.SetTrigger("hoe");
-
-            Vector3Int position = Vector3Int.FloorToInt(transform.position);
-
-            if (GameManager.instance.tileManager.IsInteractable(position))
+            if (SelectedSlot.itemName == "Hoe")
             {
-                Debug.Log("Interactable Tile");
-                GameManager.instance.tileManager.SetInteracted(position);
+                animator.SetTrigger("hoe");
+
+                Vector3Int position = Vector3Int.FloorToInt(transform.position);
+
+                if (GameManager.instance.tileManager.IsInteractable(position))
+                {
+                    Debug.Log("Interactable Tile");
+                    GameManager.instance.tileManager.SetInteracted(position);
+                }
             }
         }
     }
@@ -53,6 +56,22 @@ public class Player : MonoBehaviour
 
         SelectedIndex = index;
         OnSelectedChanged?.Invoke();
+    }
+
+    public void DropFromSlot(int i)
+    {
+        Inventory.Slot slot = inventory.slots[i];
+        if (slot.itemName == "") return;
+
+        Item prefab = GameManager.instance.itemManager.GetItemByName(slot.itemName);
+        if (prefab == null)
+        {
+            Debug.LogWarning($"No prefab is registed in ItemManager for '{slot.itemName}'");
+            return;
+        }
+
+        DropItem(prefab);
+        inventory.Remove(i);
     }
 
     public void DropItem(Item item)
