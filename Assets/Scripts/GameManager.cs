@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public TileManager tileManager;
     public ItemManager itemManager;
     public DayManager dayManager;
+    public CropManager cropManager;
     public void Awake()
     {
         if (instance != null && instance != this)
@@ -18,5 +19,6 @@ public class GameManager : MonoBehaviour
         tileManager = GetComponent<TileManager>();
         itemManager = GetComponent<ItemManager>();
         dayManager = GetComponent<DayManager>();
+        cropManager = GetComponent<CropManager>();
     }
 }
