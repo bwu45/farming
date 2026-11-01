@@ -25,4 +25,19 @@ public class Farm
     {
         return crops.TryGetValue((x, y), out Crop crop) ? crop : null;
     }
+
+    public bool TryWater(int x, int y)
+    {
+        Crop crop = GetCrop(x, y);
+        if (crop == null) return false; // nothing planted here
+
+        crop.Water();
+        return true;
+    }
+
+    public void AdvanceDay()
+    {
+        foreach (Crop crop in crops.Values)
+            crop.AdvanceDay();
+    }
 }

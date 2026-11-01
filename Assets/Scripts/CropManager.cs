@@ -21,6 +21,26 @@ public class CropManager : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        GameManager.instance.dayManager.Cycle.OnDayAdvanced += OnDayAdvanced;
+    }
+
+    public void OnDestroy()
+    {
+        if (GameManager.instance == null || GameManager.instance.dayManager == null) return;
+        GameManager.instance.dayManager.Cycle.OnDayAdvanced -= OnDayAdvanced;
+    }
+
+    public void OnDayAdvanced(int day)
+    {
+        farm.AdvanceDay(); 
+        foreach (CropView view in views.Values)
+        {
+            view.Refresh();
+        }
+    }
+
     public bool TryPlant(Vector3Int cell, string seedName)
     {
         if (!seedToCrop.TryGetValue(seedName, out CropData data)) return false; //not a seed
@@ -33,6 +53,14 @@ public class CropManager : MonoBehaviour
         view.Init(data, crop);
 
         views.Add(cell, view);
+        return true;
+    }
+
+    public bool TryWater(Vector3Int cell)
+    {
+        if (!farm.TryWater(cell.x, cell.y)) return false; //nothing planted here
+
+        views[cell].Refresh();
         return true;
     }
 }
