@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
                     GameManager.instance.tileManager.SetInteracted(position);
                 }
             }
+            else if (SelectedSlot.itemName == "Watering Can")
+                GameManager.instance.cropManager.TryWater(position);
             else if (GameManager.instance.cropManager.TryPlant(position, SelectedSlot.itemName))
                 inventory.Remove(SelectedIndex);
         }

@@ -88,4 +88,74 @@ public class FarmTests
 
         Assert.Throws<System.ArgumentNullException>(() => farm.TryPlant(0, 0, null));
     }
+
+    [Test]
+    public void WateringPlantedCropSucceeds()
+    {
+        Farm farm = new Farm();
+        Crop crop = new Crop(3);
+        farm.TryPlant(0, 0, crop);
+
+        bool watered = farm.TryWater(0, 0);
+
+        Assert.IsTrue(watered);
+        Assert.IsTrue(crop.IsWatered);
+    }
+
+    [Test]
+    public void WateringEmptyCellFails()
+    {
+        Farm farm = new Farm();
+
+        Assert.IsFalse(farm.TryWater(0, 0));
+    }
+
+    [Test]
+    public void AdvanceDayGrowsWateredCrop()
+    {
+        Farm farm = new Farm();
+        Crop crop = new Crop(3);
+        farm.TryPlant(0, 0, crop);
+        farm.TryWater(0, 0);
+
+        farm.AdvanceDay();
+
+        Assert.AreEqual(1, crop.DaysGrown);
+    }
+
+    [Test]
+    public void AdvanceDaySkipsUnwateredCrop()
+    {
+        Farm farm = new Farm();
+        Crop crop = new Crop(3);
+        farm.TryPlant(0, 0, crop);
+
+        farm.AdvanceDay();
+
+        Assert.AreEqual(0, crop.DaysGrown);
+    }
+
+    [Test]
+    public void AdvanceDayOnlyGrowsTheWateredCrops()
+    {
+        Farm farm = new Farm();
+        Crop watered = new Crop(3);
+        Crop dry = new Crop(3);
+        farm.TryPlant(0, 0, watered);
+        farm.TryPlant(1, 0, dry);
+        farm.TryWater(0, 0);
+
+        farm.AdvanceDay();
+
+        Assert.AreEqual(1, watered.DaysGrown);
+        Assert.AreEqual(0, dry.DaysGrown);
+    }
+
+    [Test]
+    public void AdvanceDayOnEmptyFarmDoesNothing()
+    {
+        Farm farm = new Farm();
+
+        Assert.DoesNotThrow(() => farm.AdvanceDay());
+    }
 }
